@@ -6,11 +6,16 @@ const app = express();
 const server = http.createServer(app);
 const router = express.Router();
 app.use('/',router);
+app.use(express.static(path.join(__dirname, 'dist')));
 
 server.listen(3000,function(){
-	console.log('Listens to 3000');
+	console.log( path.join(__dirname) );	
 });
 
-router.get('/',function(request,response){
+router.get('/test',function(request,response){
 	response.send('Hi My nodejs !');
+});
+
+router.get('/home',function(request,response){
+	response.sendFile(path.join(__dirname, 'dist/index.html'));
 });
